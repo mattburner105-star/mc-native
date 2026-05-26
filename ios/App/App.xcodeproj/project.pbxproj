@@ -96,6 +96,15 @@
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
+			xcschememanagement = {
+				autogenerateSchemes = YES;
+				schemeUserState = {
+					App.xcscheme = {
+						isShown = 1;
+						orderHint = 0;
+					};
+				};
+			};
 		};
 /* End PBXNativeTarget section */
 

@@ -28,8 +28,9 @@
     "plugins": [],
     "extra": {
       "eas": {
-        "projectId": "to-be-created"
+        "projectId": "900dc2c9-980b-45d7-bc97-bca94f3de277"
       }
-    }
+    },
+    "owner": "mattfob80s-organization"
   }
 }

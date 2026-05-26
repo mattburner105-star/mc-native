@@ -15,7 +15,8 @@
           "NSAllowsLocalNetworking": true,
           "NSAllowsArbitraryLoadsInWebContent": true,
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {

@@ -8,14 +8,14 @@
       "distribution": "internal",
       "ios": {
         "simulator": false,
-        "scheme": "App"
+        "scheme": "MissionControl"
       }
     },
     "production": {
       "distribution": "internal",
       "ios": {
         "simulator": false,
-        "scheme": "App"
+        "scheme": "MissionControl"
       }
     }
   },

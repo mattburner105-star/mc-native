@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mission Control">
+  <meta name="theme-color" content="#0f172a">
+  <title>Mission Control</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { 
+      width: 100%; height: 100%; 
+      background: #0f172a; 
+      overflow: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .splash {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #0f172a; color: #94a3b8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    .splash.hidden { opacity: 0; pointer-events: none; }
+    .splash h1 { font-size: 24px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
+    .splash p { font-size: 14px; margin-bottom: 24px; }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #1e293b;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-screen {
+      position: fixed; inset: 0;
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #0f172a; color: #94a3b8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 32px; text-align: center;
+    }
+    .error-screen h2 { color: #f87171; font-size: 20px; margin-bottom: 12px; }
+    .error-screen p { font-size: 14px; line-height: 1.6; margin-bottom: 8px; max-width: 320px; }
+    .error-screen button {
+      margin-top: 16px; padding: 12px 32px;
+      background: #3b82f6; color: white;
+      border: none; border-radius: 8px;
+      font-size: 16px; font-weight: 500;
+      cursor: pointer;
+    }
+    .error-screen button:active { background: #2563eb; }
+    iframe {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      border: none; background: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <div class="splash" id="splash">
+    <h1>Mission Control</h1>
+    <p>Connecting...</p>
+    <div class="spinner"></div>
+  </div>
+  <div class="error-screen" id="error">
+    <h2>Connection Failed</h2>
+    <p>Can't reach the Mission Control server.</p>
+    <p>Make sure you're connected to Tailscale and your PC is running.</p>
+    <button onclick="tryConnect()">Retry</button>
+  </div>
+  <iframe id="mc-frame" src="about:blank" allow="clipboard-write" style="display:none;"></iframe>
+  <script>
+    const MC_URL = 'http://100.126.125.61:3001';
+    const splash = document.getElementById('splash');
+    const errorScreen = document.getElementById('error');
+    const frame = document.getElementById('mc-frame');
+
+    function tryConnect() {
+      errorScreen.style.display = 'none';
+      splash.style.display = 'flex';
+      splash.classList.remove('hidden');
+      frame.src = MC_URL;
+      frame.style.display = 'block';
+
+      frame.onload = function() {
+        splash.classList.add('hidden');
+        setTimeout(() => { splash.style.display = 'none'; }, 300);
+      };
+
+      setTimeout(() => {
+        if (splash.style.display !== 'none') {
+          splash.style.display = 'none';
+          errorScreen.style.display = 'flex';
+          frame.style.display = 'none';
+        }
+      }, 15000);
+    }
+
+    tryConnect();
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Mission Control",
+    "slug": "mission-control",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./www/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.openclaw.missioncontrol",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true,
+          "NSAllowsArbitraryLoadsInWebContent": true,
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./www/icon.png",
+        "backgroundColor": "#0f172a"
+      },
+      "package": "com.openclaw.missioncontrol"
+    },
+    "plugins": [],
+    "extra": {
+      "eas": {
+        "projectId": "to-be-created"
+      }
+    }
+  }
+}
